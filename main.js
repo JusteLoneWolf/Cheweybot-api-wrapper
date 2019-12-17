@@ -1,6 +1,6 @@
 const axios = require('axios');
 const chalk = require('chalk');
-const {MissingTokenError} = require('./utils/CheweybotError')
+const error = require('./utils/CheweybotError')
 var settings ={
     token : "",
     active: false
@@ -21,23 +21,29 @@ var settings ={
                 })
             })
         } else {
-               throw new MissingTokenError('Token must be a string or not specified')
+               throw new error.MissingTokenError('Token must be a string or not specified')
         }
     }
 
 
     async function get(endpoint,token) {
-        return new Promise((resolve, reject) => {
+        return new Promise(async (resolve, reject) => {
             if (!settings.token && !token) {
-                throw new MissingTokenError('Token must be a string or not specified')
+                throw new error.MissingTokenError('Token must be a string or not specified')
             }
-             axios.get(`https://api.chewey-bot.ga/${endpoint}`, {headers: {"Authorization": token ? token : settings.token }}).then((res) => {
+            if(!endpoint){
+                throw new error.Noendpointspecified('No endpoint specified')
+            }
+             await axios.get(`https://api.chewey-bot.ga/${endpoint}`, {headers: {"Authorization": token ? token : settings.token}}).then((res) => {
                  resolve(res.data)
-            }).catch(error => {
-
-                if (error.response.status === 404) {
-                     reject(`${chalk.blue('[Cheweybot-Wrapper]')} ${chalk.red('[Error] No endpoint find')}`);
-                } else {
+            }).catch(err => {
+                if (err.response.status === 404) {
+                    throw new err.Noendpointfind('No endpoint find')
+                } else if(token || settings.token) {
+                    if(err.response.status === 403) {
+                        throw new error.Incorrectlogin('Incorrect token provided')
+                    }
+                }else{
                      reject(`${chalk.blue('[Cheweybot-Wrapper]')} ${chalk.red('[Error]')} Internal error: ${error.toString()} with error code ${error.response.status}`);
                 }
             })

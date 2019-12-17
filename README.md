@@ -60,3 +60,11 @@ cheweybotapi.get(endpoint, TOKEN).then((res)=>{
 
 ## Credit
 Thanks to Chewey#1635 for accepting the creation of this module
+
+## Notes
+#### Error Code
+| Error codes       | Signification           |
+| ------------- |:-------------:|
+| 0x00001      | No token specified |
+|0x00002|No endpoint specified
+| 0x00404     | No endpoint find     |

@@ -1,6 +1,6 @@
 {
   "name": "cheweybot-api-wrapper",
-  "version": "1.0.2",
+  "version": "1.0.7",
   "description": "A simply wrapper for cheweybot-api ",
   "main": "main.js",
   "scripts": {
@@ -8,7 +8,13 @@
   },
   "keywords": [
     "cheweybot-api",
-    "api"
+    "api",
+    "random image",
+    "image",
+    "wrapper",
+    "random",
+    "wolf image",
+    "cat"
   ],
   "author": "zechaos",
   "license": "ISC",
