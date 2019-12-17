@@ -19,11 +19,12 @@ If you couldn't DM not the bot please check your privacy settings
 let cheweybotapi = require('cheweybot-api-wrapper')
 
 cheweybotapi.login(Token) //It must be once in all your code
-    cheweybotapi.get(endpoint).then((res)=>{
+    cheweybotapi.image.get(endpoint).then((res)=>{
         console.log(res)
     }).catch((err)=>{
         console.log(err)
     })
+
 /*[ 'space',
     'cat',
     'dog',
@@ -41,17 +42,69 @@ cheweybotapi.login(Token) //It must be once in all your code
     'wolf',
     'fox' ]
 */
+
+api.mc(MCIP).then((res)=>{
+    console.log(res)
+}).catch((err)=>{
+    console.log(err)
+})
 ```
 or
 ```js
 let cheweybotapi = require('cheweybot-api-wrapper')
 
-cheweybotapi.get(endpoint, TOKEN).then((res)=>{
+cheweybotapi.image.get(endpoint, TOKEN).then((res)=>{
         console.log(res)
     }).catch((err)=>{
         console.log(err)
     })
 ```
+## Usage
+Call this module
+```js
+let cheweybotapi = require('cheweybot-api-wrapper') 
+```
+----------------------------------------
+#### _List of feature_
+_Text between `[]` is not require_
+
+##### **cheweybotapi.login(token)** `Note if using this, '[,token]' in calling function is not require`
+##### **cheweybotapi.image.get(url[,token])**
+##### **cheweybotapi.mc(ip[,token])**
+
+----------------------------------------
+
+#### _Response_
+All endpoints respond on data
+```js
+{data:'your-image'}
+```
+----------------------------------------
+#### _Error_
+##### Each error is specified and specified is specified 
+Exemple Error:
+```js
+Noendpointfind: {
+  name: 'Noendpointfind', //Name of this error
+  message: 'No endpoint find', // description of this error
+  status: '0x00404' //Error code (for all error codes, it is below)  
+}
+```
+
+## Endpoint
+#### Image
+
+space,cat,dog,bird,nature,fantasy-art,plane,otter,rabbit,snake,car,turtle,duck,panda,wolf,fox 
+
+
+#### MC API 
+<div align="center">
+  <br />
+  <p>
+    <a href="https://chewey-bot.ga"><img src="https://api.chewey-bot.ga/mcap/image/default/19081180148127185202193186201182189127191182197205133133136136131128138129129129129113193189178202182195196205192191189186191182205153202193186201182189113159182197200192195188172130127137126130127130134174.png" width="546" alt="discord.js" /></a>
+  </p>
+  <br />
+</div>
 
 ## Link
 
@@ -66,5 +119,7 @@ Thanks to Chewey#1635 for accepting the creation of this module
 | Error codes       | Signification           |
 | ------------- |:-------------:|
 | 0x00001      | No token specified |
-|0x00002|No endpoint specified
+|0x00002|No endpoint specified|
+|0x00403|Incorrect login|
 | 0x00404     | No endpoint find     |
+|0x01404|No IP specified|

@@ -1,35 +1,37 @@
 function MissingTokenError(message) {
     this.name = this.constructor.name;
     this.message = message;
-    this.status = "0x00001"
+    this.status = "0x00001";
     Error.captureStackTrace(this, this.message)
 }
-function Noendpointspecified(message) {
+function NoEndpointSpecified(message) {
     this.name = this.constructor.name;
     this.message = message;
-    this.status = "0x00002"
+    this.status = "0x00002";
     Error.captureStackTrace(this, this.message)
 }
-function Noendpointfind(message) {
+function NoEndpointFind(message) {
     this.name = this.constructor.name;
     this.message = message;
-    this.status = "0x00404"
+    this.status = "0x00404";
     Error.captureStackTrace(this, this.message)
 }
-function Incorrectlogin(message) {
+function IncorrectLogin(message) {
     this.name = this.constructor.name;
     this.message = message;
-    this.status = "0x00403"
-    Error.captureStackTrace(this, this.message)
+    this.status = "0x00403";
+    Error.captureStackTrace(this, this.status)
+}
+function NoIPSpecified(message) {
+    this.name = this.constructor.name;
+    this.message = message;
+    this.status = "0x01404";
+    Error.captureStackTrace(this, this.status)
 }
 module.exports =  {
     MissingTokenError,
-    Noendpointfind,
-    Noendpointspecified,
-    Incorrectlogin
+    NoEndpointFind,
+    NoEndpointSpecified,
+    IncorrectLogin,
+    NoIPSpecified
 };
-
-/*
-ERROR CODE
-4e6f7420546f6b656e
- */
