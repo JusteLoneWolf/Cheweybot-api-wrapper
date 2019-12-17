@@ -58,5 +58,5 @@ cheweybotapi.get(endpoint, TOKEN).then((res)=>{
 [Support server]( https://discords.ga/chewey),
 [Website API](https://api.chewey-bot.ga/)
 
-##Credit
+## Credit
 Thanks to Chewey#1635 for accepting the creation of this module
