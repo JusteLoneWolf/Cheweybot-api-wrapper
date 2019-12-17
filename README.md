@@ -12,15 +12,14 @@ A simply wrapper for https://api.chewey-bot.ga api
 2. Ran command in commands channel `!role-me api-user`
 3. DM Chewey Bot and ran `!claim-api-key`
 
-If you don't DM the bot please check your privacy settings
-
+If you couldn't DM not the bot please check your privacy settings
 ## How to use
 
 ```js
 let cheweybotapi = require('cheweybot-api-wrapper')
 
 cheweybotapi.login(Token) //It must be once in all your code
-    api.get(endpoint).then((res)=>{
+    cheweybotapi.get(endpoint).then((res)=>{
         console.log(res)
     }).catch((err)=>{
         console.log(err)
@@ -42,6 +41,16 @@ cheweybotapi.login(Token) //It must be once in all your code
     'wolf',
     'fox' ]
 */
+```
+or
+```js
+let cheweybotapi = require('cheweybot-api-wrapper')
+
+cheweybotapi.get(endpoint, TOKEN).then((res)=>{
+        console.log(res)
+    }).catch((err)=>{
+        console.log(err)
+    })
 ```
 
 ## Link

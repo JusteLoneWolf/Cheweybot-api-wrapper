@@ -26,12 +26,12 @@ var settings ={
     }
 
 
-    async function get(endpoint) {
+    async function get(endpoint,token) {
         return new Promise((resolve, reject) => {
-            if (!settings.token) {
+            if (!settings.token && !token) {
                 throw new MissingTokenError('Token must be a string or not specified')
             }
-             axios.get(`https://api.chewey-bot.ga/${endpoint}`, {headers: {"Authorization": settings.token}}).then((res) => {
+             axios.get(`https://api.chewey-bot.ga/${endpoint}`, {headers: {"Authorization": token ? token : settings.token }}).then((res) => {
                  resolve(res.data)
             }).catch(error => {
 
