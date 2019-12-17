@@ -1,1 +1,53 @@
 # Cheweybot-api-wrapper
+
+A simply wrapper for https://api.chewey-bot.ga api
+
+## Installation
+
+`npm i cheweybot-api-wrapper`
+
+## How to get token
+
+1. Join [discord server]( https://discords.ga/chewey)
+2. Ran command in commands channel `!role-me api-user`
+3. DM Chewey Bot and ran `!claim-api-key`
+
+If you don't DM the bot please check your privacy settings
+
+## How to use
+
+```js
+let cheweybotapi = require('cheweybot-api-wrapper')
+
+cheweybotapi.login(Token) //It must be once in all your code
+    api.get(endpoint).then((res)=>{
+        console.log(res)
+    }).catch((err)=>{
+        console.log(err)
+    })
+/*[ 'space',
+    'cat',
+    'dog',
+    'birb',
+    'nature',
+    'fantasy-art',
+    'plane',
+    'otter',
+    'rabbit',
+    'snake',
+    'car',
+    'turtle',
+    'duck',
+    'panda',
+    'wolf',
+    'fox' ]
+*/
+```
+
+## Link
+
+[Support server]( https://discords.ga/chewey),
+[Website API](https://api.chewey-bot.ga/)
+
+##Credit
+Thanks to Chewey#1635 for accepting the creation of this module
