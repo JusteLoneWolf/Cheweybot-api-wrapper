@@ -49,11 +49,7 @@ api.mc('mc.hypixel.net').then((res)=>{
     console.log(err)
 })
 
-api.analystics.init(client,'236627494764150784').then((res) => {
-        console.log(res)
-    }).catch((err) => {
-        console.log(err)
-    })
+api.analystics.init(client,'236627494764150784')
 ```
 or
 ```js
@@ -71,11 +67,7 @@ api.mc('mc.hypixel.net', TOKEN).then((res)=>{
     console.log(err)
 })
 
-api.analystics.init(client,'236627494764150784', TOKEN).then((res) => {
-        console.log(res)
-    }).catch((err) => {
-        console.log(err)
-    })
+api.analystics.init(client,'236627494764150784', TOKEN)
 ```
 ## Usage
 Call this module
@@ -104,16 +96,9 @@ All endpoints respond
 //Image and MC
 {data:'your-image'}
 ```
-
-```js
-//Analystics
-{ ok: true
-  url:'https://cheweyz.github.io/discord-bot-analytics-dash/index.html?id=OWNERID' }
-
-```
 ----------------------------------------
 #### _Error_
-##### Each error is specified 
+##### Each error is specified and specified is specified 
 Exemple Error:
 ```js
 Noendpointfind: {

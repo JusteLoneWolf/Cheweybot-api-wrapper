@@ -126,30 +126,43 @@ function init(lib,id,token) {
                 CollectMessage();
             //await autoloader();
 
-                setTimeout(() => {
 
-                    autoloader();
-                    resolve(sender(MakeData()))
-                }, 1000);
         })
     }
 }
 
 function CollectMessage() {
-    if(data.lib!=null) {
-        data.lib.on("messageCreate", (msg) => {
-            data.received_messages++;
-            if (msg.author.id === data.lib.user.id) {
-                data.sent_messages++;
+    return new Promise(async (resolve, reject) => {
+        if (data.lib != null) {
+            if (data.lib.user === null) {
+                data.lib.on("ready", () => {
+                    setTimeout(() => {
+                        autoloader();
+                        resolve(sender(MakeData()))
+                    }, 1000);
+                })
+            } else {
+                setTimeout(() => {
+
+                    autoloader();
+                    resolve(sender(MakeData()))
+                }, 1000);
             }
-        });
-        data.lib.on("message", (msg) => {
-            data.received_messages++;
-            if (msg.author.id === data.lib.user.id) {
-                data.sent_messages++;
-            }
-        })
-    }
+            data.lib.on("messageCreate", (msg) => {
+                data.received_messages++;
+                if (msg.author.id === data.lib.user.id) {
+                    data.sent_messages++;
+                }
+            });
+            data.lib.on("message", (msg) => {
+                data.received_messages++;
+                if (msg.author.id === data.lib.user.id) {
+                    data.sent_messages++;
+                }
+            })
+
+        }
+    })
 }
 function autoloader() {
         if (data.lib && !data.interval) {
@@ -193,8 +206,7 @@ function sender(send) {
             }
         }).then((res) => {
             res.data.url = `https://cheweyz.github.io/discord-bot-analytics-dash/index.html?id=${data.owner}`
-            console.log(`[CheWeyBot-Wrapper] [Analystics] Post done !`);
-            resolve(res.data)
+            console.log(`[CheWeyBot-Wrapper] [Analystics] Post done !\n${res.data.url}`);
         }).catch(err => {
             if (settings.token) {
                 if (err.response.status === 403) {
