@@ -18,7 +18,7 @@ If you couldn't DM not the bot please check your privacy settings
 ```js
 let cheweybotapi = require('cheweybot-api-wrapper')
 
-cheweybotapi.login(Token) //It must be once in all your code
+cheweybotapi.login(Token); //It must be once in all your code
     cheweybotapi.image.get('cat').then((res)=>{
         console.log(res)
     }).catch((err)=>{
@@ -49,7 +49,7 @@ api.mc('mc.hypixel.net').then((res)=>{
     console.log(err)
 })
 
-api.analystics.init(client,'236627494764150784')
+api.analytics.init(client,'236627494764150784')
 ```
 or
 ```js
@@ -67,7 +67,7 @@ api.mc('mc.hypixel.net', TOKEN).then((res)=>{
     console.log(err)
 })
 
-api.analystics.init(client,'236627494764150784', TOKEN) // You can place it in ready event
+api.analytics.init(client,'236627494764150784', TOKEN)
 ```
 ## Usage
 Call this module
@@ -81,12 +81,12 @@ _Text between `[]` is not require_
 ##### **cheweybotapi.login(token)** : Note if using this, '[,token]' in calling function is not require
 ##### **cheweybotapi.image.get(url[,token])**
 ##### **cheweybotapi.mc(ip[,token])**
-##### **cheweybotapi.analystics.init(lib, ownerid[,token])**
+##### **cheweybotapi.analytics.init(lib, ownerid[,token])**
 
 #### Other Function
 
-##### **cheweybotapi.analystics.stop()** : Disabled analystics autoposting
-#####  **cheweybotapi.analystics.start()** : Enabled analystics autoposting
+##### **cheweybotapi.analytics.stop()** : Disabled analytics autoposting
+#####  **cheweybotapi.analytics.start()** : Enabled analytics autoposting
 
 ----------------------------------------
 
@@ -124,7 +124,7 @@ space,cat,dog,bird,nature,fantasy-art,plane,otter,rabbit,snake,car,turtle,duck,p
 </div>
 
 
-#### Analystics
+#### Analytics
 <div align="center">
   <br />
   <p>
