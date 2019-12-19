@@ -113,7 +113,7 @@ All endpoints respond
 ```
 ----------------------------------------
 #### _Error_
-##### Each error is specified and specified is specified 
+##### Each error is specified 
 Exemple Error:
 ```js
 Noendpointfind: {
