@@ -67,7 +67,7 @@ api.mc('mc.hypixel.net', TOKEN).then((res)=>{
     console.log(err)
 })
 
-api.analystics.init(client,'236627494764150784', TOKEN)
+api.analystics.init(client,'236627494764150784', TOKEN) // You can place it in ready event
 ```
 ## Usage
 Call this module
