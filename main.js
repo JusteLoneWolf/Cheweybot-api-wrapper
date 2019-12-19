@@ -5,7 +5,7 @@ const settings = {
     token: "",
     active: false
 };
-var data
+let data;
 module.exports.login =(ApiToken,lib)=>{
     if (settings.active){
         return new Promise((resolve, reject) => {
@@ -82,7 +82,7 @@ module.exports.analystics = {
     init,
     start,
     stop
-}
+};
 
 function start() {
     if(data.running === false){
@@ -121,39 +121,33 @@ function init(lib,id,token) {
                     sent_messages: 0,
                     received_messages: 0
                 };
-                console.log('[CheWeyBot-Wrapper] [Analystics] Ready')
-            console.log('[CheWeyBot-Wrapper] [Analystics] Collecting Data...')
-                CollectMessage();
-            //await autoloader();
-
-
+                await CollectMessage();
         })
     }
 }
 
 function CollectMessage() {
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async (resolve) => {
         if (data.lib != null) {
             if (data.lib.user === null) {
                 data.lib.on("ready", () => {
-                    setTimeout(() => {
+                        console.log('[CheWeyBot-Wrapper] [Analystics] Ready');
                         autoloader();
                         resolve(sender(MakeData()))
-                    }, 1000);
                 })
             } else {
-                setTimeout(() => {
-
+                    console.log('[CheWeyBot-Wrapper] [Analystics] Ready');
                     autoloader();
                     resolve(sender(MakeData()))
-                }, 1000);
             }
+
             data.lib.on("messageCreate", (msg) => {
                 data.received_messages++;
                 if (msg.author.id === data.lib.user.id) {
                     data.sent_messages++;
                 }
             });
+
             data.lib.on("message", (msg) => {
                 data.received_messages++;
                 if (msg.author.id === data.lib.user.id) {
@@ -169,21 +163,24 @@ function autoloader() {
             data.interval = setInterval(() => {
                 resolve(sender(MakeData())).then(() => {}, () => {})
             }, 10.1 * 60 * 1000);
-            console.log('[CheWeyBot-Wrapper] [Analystics] Autoload started')
+            console.log('[CheWeyBot-Wrapper] [Analystics] Autoload has been started')
         } else {
             console.log('[CheWeyBot-Wrapper] [Analystics] Analystics is not initialized')
         }
 }
+
 function stopautoloader() {
     if(data.interval){
         clearInterval(data.interval);
         delete data.interval;
-        console.log('[CheWeyBot-Wrapper] [Analystics] Autoload stop')
+        console.log('[CheWeyBot-Wrapper] [Analystics] Autoload has been stop')
     } else {
         console.log('[CheWeyBot-Wrapper] [Analystics] Autoload is not initialized')
     }
 }
+
 function MakeData(){
+    console.log('[CheWeyBot-Wrapper] [Analystics] Collecting Data...')
         let channelCount = data.lib.channelGuildMap ? Object.keys(data.lib.channelGuildMap).length : data.lib.channels.size
     return {
             servers: data.lib.guilds.size,
@@ -194,10 +191,11 @@ function MakeData(){
             ram_used: process.memoryUsage().heapUsed
         }
 }
+
 function sender(send) {
     return new Promise(async (resolve, reject) => {
         let content = JSON.stringify(send);
-        console.log('[CheWeyBot-Wrapper] [Analystics] Send Data...')
+        console.log('[CheWeyBot-Wrapper] [Analystics] Send Data...');
         axios.post('https://api.chewey-bot.ga/analytics/post', content, {
             headers: {
                 'Content-Type': 'application/json',
@@ -205,12 +203,14 @@ function sender(send) {
                 'Authorization': settings.token
             }
         }).then((res) => {
-            res.data.url = `https://cheweyz.github.io/discord-bot-analytics-dash/index.html?id=${data.owner}`
+            res.data.url = `https://cheweyz.github.io/discord-bot-analytics-dash/index.html?id=${data.owner}`;
             console.log(`[CheWeyBot-Wrapper] [Analystics] Post done !\n${res.data.url}`);
         }).catch(err => {
             if (settings.token) {
                 if (err.response.status === 403) {
-                    reject(new error.IncorrectLogin('Incorrect token provided'))
+                    return console.error(new error.IncorrectLogin('Incorrect token provided'))
+                }else if(err.response.status === 429){
+                   return console.error('[CheWeyBot-Wrapper] [Analystics] Error: Too many request HTTPError: 429')
                 }
             }
             reject(`[CheWeyBot-Wrapper] [Analystics] ERROR: ${err}`)
