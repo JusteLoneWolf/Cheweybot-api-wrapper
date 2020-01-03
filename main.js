@@ -1,10 +1,10 @@
-const axios = require('axios');
-const chalk = require('chalk');
-const error = require('./utils/CheweybotError');
-const settings = {
-    token: "",
-    active: false
-};
+const axios = require('axios'),
+     chalk = require('chalk'),
+    error = require('./utils/CheweybotError'),
+    settings = {
+        token: "",
+        active: false
+    };
 let data;
 module.exports.login =(ApiToken,lib)=> {
     if (settings.active) {
@@ -14,7 +14,7 @@ module.exports.login =(ApiToken,lib)=> {
     } else if (typeof ApiToken == "string") {
         settings.token = ApiToken;
         return new Promise(async (resolve, reject) => {
-            await axios.get(`https://api.chewey-bot.ga/endpoints`, {headers: {"Authorization": ApiToken}}).then(() => {
+            await axios.get(`https://api.chewey-bot.top/endpoints`, {headers: {"Authorization": ApiToken}}).then(() => {
                 settings.active = true
             }).catch((error) => {
                 reject(error)
@@ -38,7 +38,7 @@ module.exports.image = {
             if (!endpoint) {
                 reject(new error.NoEndpointSpecified('No endpoint specified'))
             }
-            await axios.get(`https://api.chewey-bot.ga/${endpoint}`, {headers: {"Authorization": token ? token : settings.token}}).then((res) => {
+            await axios.get(`https://api.chewey-bot.top/${endpoint}`, {headers: {"Authorization": token ? token : settings.token}}).then((res) => {
                 resolve(res.data)
             }).catch((err) => {
                 if (err.response.status === 404) {
@@ -64,7 +64,7 @@ module.exports.mc = async (ip,token) =>{
         if(!ip){
             reject( new error.NoIPSpecified('No ip specified'))
         }
-        await axios.get(`https://api.chewey-bot.ga/mcap/server/${ip}`, {headers: {"Authorization": token ? token : settings.token}}).then((res) => {
+        await axios.get(`https://api.chewey-bot.top/mcap/server/${ip}`, {headers: {"Authorization": token ? token : settings.token}}).then((res) => {
             resolve(res.data)
         }).catch(err => {
              if(token || settings.token) {
